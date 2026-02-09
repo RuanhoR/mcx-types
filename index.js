@@ -1,0 +1,1 @@
+export default "This is a type package, you can't import it as code.";
