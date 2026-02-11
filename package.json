@@ -1,6 +1,6 @@
 {
   "name": "@mbler/mcx-types",
-  "version": "0.0.1-alpha.r1",
+  "version": "0.0.1-alpha",
   "description": "a DSL compiler of mcx",
   "scripts": {
     "test": "node __test__/index.js",
