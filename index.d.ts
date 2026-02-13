@@ -17,18 +17,7 @@ interface EventOpt {
   data: Record<string, (event: any) => void>;
 }
 declare class Event {
-  #currenyRun: string[];
-  #canRun: string[];
-  #eventList: EventOpt["data"];
-  #on: "after" | "before";
-  /**
-   *
-   * @param eventName {string} - eventName
-   * @returns {boolean} - if succeess
-   */
-  #bind_event(eventItem: string): boolean;
   subscribe(...events: string[]): boolean;
-  #unbind_event(eventName: string): boolean;
   /**
    * unscribe
    */
@@ -48,4 +37,4 @@ interface MCXFile<T extends MCXFileType> extends MCXFileBase {
     : never;
   event: T extends "event" ? Event : never;
 }
-export type { CompileOpt, CompileUserConfig, MCXFile };
+export type { CompileOpt, CompileUserConfig, MCXFile, EventOpt };
