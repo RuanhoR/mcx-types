@@ -15,6 +15,8 @@ interface CompileOpt {
 interface EventOpt {
   on: "after" | "before";
   data: Record<string, (event: any) => void>;
+  extends ?: MCXFile<"event">;
+  tick ?: number
 }
 declare class Event {
   subscribe(...events: string[]): boolean;
@@ -25,7 +27,7 @@ declare class Event {
   useWorld(_world: World): void;
 }
 type MCXFileType = "app" | "component" | "event";
-interface MCXFileBase extends Object {
+interface MCXFileBase {
   type: MCXFileType;
   setup: Record<string, any>;
 }
