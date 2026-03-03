@@ -27,16 +27,29 @@ declare class Event {
   useWorld(_world: World): void;
 }
 type MCXFileType = "app" | "component" | "event";
+/** runtime context passed into `setup` */
+type MCXCtx = {
+  type: MCXFileType;
+  data?: Event;
+};
+
 interface MCXFileBase {
   type: MCXFileType;
-  setup: Record<string, any>;
+  setup: (ctx: MCXCtx) => void;
 }
+
+/**
+ * New MCXFile shape:
+ * - `setup` is a function accepting an MCXCtx
+ * - `app` holds runtime-only helpers like `event`
+ * - `event` is present for event mcx
+ */
 interface MCXFile<T extends MCXFileType> extends MCXFileBase {
   app: T extends "app"
     ? {
-        event ?: Event;
+        event?: Event;
       }
     : never;
   event: T extends "event" ? Event : never;
 }
-export type { CompileOpt, CompileUserConfig, MCXFile, EventOpt };
+export type { CompileOpt, CompileUserConfig, MCXFile, EventOpt, MCXCtx };
