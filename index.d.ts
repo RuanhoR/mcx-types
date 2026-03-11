@@ -15,14 +15,12 @@ interface CompileOpt {
 interface EventOpt {
   on: "after" | "before";
   data: Record<string, (event: any) => void>;
-  extends ?: MCXFile<"event">;
-  tick ?: number
+  extends?: MCXFile<"event">[];
+  tick?: number
 }
 declare class Event {
+  constructor(opt: EventOpt);
   subscribe(...events: string[]): boolean;
-  /**
-   * unscribe
-   */
   unscribe(...events: string[]): boolean;
   useWorld(_world: World): void;
 }
@@ -37,19 +35,14 @@ interface MCXFileBase {
   type: MCXFileType;
   setup: (ctx: MCXCtx) => void;
 }
-
-/**
- * New MCXFile shape:
- * - `setup` is a function accepting an MCXCtx
- * - `app` holds runtime-only helpers like `event`
- * - `event` is present for event mcx
- */
+interface AppMCXContent {
+  event: MCXFile<"event">[]
+}
+interface EventMCXContent {
+  event: EventOpt
+}
 interface MCXFile<T extends MCXFileType> extends MCXFileBase {
-  app: T extends "app"
-    ? {
-        event?: Event;
-      }
-    : never;
-  event: T extends "event" ? Event : never;
+  app: T extends "app" ? AppMCXContent :
+  T extends "event" ? EventMCXContent : void
 }
 export type { CompileOpt, CompileUserConfig, MCXFile, EventOpt, MCXCtx };

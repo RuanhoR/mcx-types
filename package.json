@@ -1,12 +1,7 @@
 {
   "name": "@mbler/mcx-types",
-  "version": "0.0.2-beta",
+  "version": "0.0.2-beta.r2026031102",
   "description": "a DSL compiler of mcx",
-  "scripts": {
-    "test": "node __test__/index.js",
-    "build": "rollup -c"
-  },
-  "main": "./index.js",
   "keywords": [
     "types"
   ],
