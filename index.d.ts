@@ -27,8 +27,8 @@ declare class Event {
 type MCXFileType = "app" | "component" | "event";
 /** runtime context passed into `setup` */
 type MCXCtx = {
-  type: MCXFileType;
-  data?: Event;
+  event?: Event[];
+  define?: (define: Record<string, string>) => void
 };
 
 interface MCXFileBase {

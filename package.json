@@ -20,10 +20,8 @@
   "module": "module",
   "files": [
     "index.d.ts",
-    "index.js",
     "README.md",
-    "LICENSE",
-    "__test__"
+    "LICENSE"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
