@@ -1,6 +1,6 @@
 {
   "name": "@mbler/mcx-types",
-  "version": "0.0.2-beta.r2026031102",
+  "version": "0.0.2-beta.r2026031103",
   "description": "a DSL compiler of mcx",
   "keywords": [
     "types"

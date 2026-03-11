@@ -38,8 +38,11 @@ interface MCXFileBase {
 interface AppMCXContent {
   event: MCXFile<"event">[]
 }
+interface MCXEventData extends Omit<EventOpt, 'data'> {
+  data: Record<string, string>
+}
 interface EventMCXContent {
-  event: EventOpt
+  event: MCXEventData
 }
 interface MCXFile<T extends MCXFileType> extends MCXFileBase {
   app: T extends "app" ? AppMCXContent :
