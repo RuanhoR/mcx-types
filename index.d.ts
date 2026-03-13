@@ -21,19 +21,18 @@ interface EventOpt {
 declare class Event {
   constructor(opt: EventOpt);
   subscribe(...events: string[]): boolean;
-  unscribe(...events: string[]): boolean;
+  unsubscribe(...events: string[]): boolean;
   useWorld(_world: World): void;
 }
 type MCXFileType = "app" | "component" | "event";
 /** runtime context passed into `setup` */
 type MCXCtx = {
   event?: Event[];
-  define?: (define: Record<string, string>) => void
 };
 
 interface MCXFileBase {
   type: MCXFileType;
-  setup: (ctx: MCXCtx) => void;
+  setup: (ctx: MCXCtx) => any;
 }
 interface AppMCXContent {
   event: MCXFile<"event">[]
@@ -42,10 +41,10 @@ interface MCXEventData extends Omit<EventOpt, 'data'> {
   data: Record<string, string>
 }
 interface EventMCXContent {
-  event: MCXEventData
+  event?: MCXEventData
 }
 interface MCXFile<T extends MCXFileType> extends MCXFileBase {
   app: T extends "app" ? AppMCXContent :
   T extends "event" ? EventMCXContent : void
 }
-export type { CompileOpt, CompileUserConfig, MCXFile, EventOpt, MCXCtx };
+export type { CompileOpt, CompileUserConfig, MCXFile, EventOpt, MCXCtx, MCXFileBase };

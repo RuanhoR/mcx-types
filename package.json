@@ -1,6 +1,6 @@
 {
   "name": "@mbler/mcx-types",
-  "version": "0.0.2-beta.r2026031103",
+  "version": "0.0.2-beta.r2026031201",
   "description": "a DSL compiler of mcx",
   "keywords": [
     "types"
@@ -12,8 +12,6 @@
   },
   "dependencies": {
     "@babel/parser": "7.28.5",
-    "@babel/types": "7.28.6",
-    "@types/node": "latest",
     "@minecraft/server": "2.0.0",
     "rollup": "4.57.1"
   },
