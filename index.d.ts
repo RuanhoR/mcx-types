@@ -6,11 +6,7 @@ interface CompileUserConfig {
   rollupOptions?: RollupOptions;
 }
 interface CompileOpt {
-  main: string;
-  ProjectDir: string;
   moduleDir: string;
-  output: string;
-  config?: Partial<CompileUserConfig>;
 }
 interface EventOpt {
   on: "after" | "before";
@@ -40,11 +36,8 @@ interface AppMCXContent {
 interface MCXEventData extends Omit<EventOpt, 'data'> {
   data: Record<string, string>
 }
-interface EventMCXContent {
-  event?: MCXEventData
-}
 interface MCXFile<T extends MCXFileType> extends MCXFileBase {
   app: T extends "app" ? AppMCXContent :
-  T extends "event" ? EventMCXContent : void
+  T extends "event" ? MCXEventData : void
 }
 export type { CompileOpt, CompileUserConfig, MCXFile, EventOpt, MCXCtx, MCXFileBase };
