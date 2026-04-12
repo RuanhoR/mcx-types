@@ -1,12 +1,12 @@
-import type { ParserOptions } from "@babel/parser";
-import type { RollupOptions } from "rollup";
 import type { World } from "@minecraft/server";
-interface CompileUserConfig {
-  babelParser?: ParserOptions;
-  rollupOptions?: RollupOptions;
-}
+import type { LanguagePlugin } from "@volar/language-core"
 interface CompileOpt {
   moduleDir: string;
+  tsconfigPath: string;
+  sourcemap: boolean;
+  basedir?: string;
+  ts?: typeof import("typescript")
+  mcxLanguagePlugin?: (ts: typeof import("typescript")) => LanguagePlugin<unknown>
 }
 interface EventOpt {
   on: "after" | "before";
@@ -33,11 +33,16 @@ interface MCXFileBase {
 interface AppMCXContent {
   event: MCXFile<"event">[]
 }
-interface MCXEventData extends Omit<EventOpt, 'data'> {
-  data: Record<string, string>
+interface MCXEventData {
+  event: {
+    data: Record<string, string>
+    on: EventOpt["on"];
+    extends: EventOpt["extends"];
+    tick: EventOpt["tick"]
+  }
 }
 interface MCXFile<T extends MCXFileType> extends MCXFileBase {
   app: T extends "app" ? AppMCXContent :
   T extends "event" ? MCXEventData : void
 }
-export type { CompileOpt, CompileUserConfig, MCXFile, EventOpt, MCXCtx, MCXFileBase };
+export type { CompileOpt, MCXFile, EventOpt, MCXCtx, MCXFileBase };
